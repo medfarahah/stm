@@ -343,6 +343,8 @@ code {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .nav-tab::before {

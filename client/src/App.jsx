@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import POS from './components/POS'
 import Dashboard from './components/Dashboard'
@@ -11,40 +12,27 @@ import Expenses from './components/Expenses'
 import Reports from './components/Reports'
 
 function App() {
-  const [activeTab, setActiveTab] = useState('pos')
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'pos':
-        return <POS />
-      case 'dashboard':
-        return <Dashboard />
-      case 'categories':
-        return <Categories />
-      case 'products':
-        return <Products />
-      case 'suppliers':
-        return <Suppliers />
-      case 'purchases':
-        return <Purchases />
-      case 'sales':
-        return <Sales />
-      case 'expenses':
-        return <Expenses />
-      case 'reports':
-        return <Reports />
-      default:
-        return <POS />
-    }
-  }
-
   return (
-    <div>
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="container">
-        {renderContent()}
+    <BrowserRouter>
+      <div>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<POS />} />
+            <Route path="/pos" element={<POS />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/purchases" element={<Purchases />} />
+            <Route path="/sales" element={<Sales />} />
+            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   )
 }
 
